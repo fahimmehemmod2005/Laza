@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laza/utils/widgets/custom_button.dart';
-import 'package:laza/utils/widgets/custom_terms.dart';
 import 'package:laza/utils/widgets/custom_textformfield.dart';
-import 'package:laza/view/pages/auth/controllers/switch_controller.dart';
+import 'controllers/switch_controller.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final switchCtrl = Get.put(SwitchController());
   final _formKey = GlobalKey<FormState>();
 
@@ -30,24 +30,24 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 100.h),
+                  SizedBox(height: 45.h),
+                  InkWell(
+                    onTap: () => Get.back(),
+                    child: CircleAvatar(
+                      backgroundColor: const Color(0xffF5F6FA),
+                      child: SvgPicture.asset('assets/icons/right_arrow.svg'),
+                    ),
+                  ),
+                  SizedBox(height: 18.h),
                   Center(
                     child: Column(
                       children: [
                         Text(
-                          'Welcome',
+                          'Sign Up',
                           style: GoogleFonts.inter(
                             fontWeight: FontWeight.w600,
                             fontSize: 28.sp,
                             color: const Color(0xff1D1E20),
-                          ),
-                        ),
-                        Text(
-                          'Please enter your data to continue',
-                          style: GoogleFonts.inter(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15.sp,
-                            color: const Color(0xff8F959E),
                           ),
                         ),
                       ],
@@ -57,27 +57,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   // ---------- Text Fields ----------
                   SizedBox(height: 150.h),
 
+                  // Username Field
                   CustomTextFormField(
                     hintText: 'Esther Howard',
                     label: 'Username',
-                    validator: ( value) {
+                    validator:( value) {
                       if (value == null || value.isEmpty) {
-                        return "Email is required";
-                      }
-                      else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                        return "Enter a valid email";
+                        return "User name is required";
                       }
                       return null;
-                    },
-                    suffixIcon: Icon(Icons.check, color: Color(0xff34C358)),
+                    }, // Use correct validator
+                    suffixIcon: const Icon(Icons.check, color: Color(0xff34C358)),
                   ),
                   SizedBox(height: 20.h),
 
+                  // Password Field
                   CustomTextFormField(
                     hintText: 'HJ@#9783kja',
                     label: 'Password',
                     obscureText: true,
-                    validator:  ( value) {
+                    validator: ( value) {
                       if (value == null || value.isEmpty) {
                         return "Password is required";
                       }
@@ -91,30 +90,28 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: GoogleFonts.inter(
                         fontWeight: FontWeight.w400,
                         fontSize: 11.sp,
-                        color: Color(0xff34C358),
+                        color: const Color(0xff34C358),
                       ),
                     ),
                   ),
+                  SizedBox(height: 20.h),
 
-                  SizedBox(height: 10.h),
-
-                  //---------- Forgot Password ----------
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () => Get.toNamed('/forgot_screen'),
-                      child: Text(
-                        'Forgot Password?',
-                        style: GoogleFonts.inter(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15.sp,
-                          color: const Color(0xffEA4335),
-                        ),
-                      ),
-                    ),
+                  // Email Field
+                  CustomTextFormField(
+                    hintText: 'bill.sanders@example.com',
+                    label: 'Email Address',
+                    validator: ( value) {
+                      if (value == null || value.isEmpty) {
+                        return "Email is required";
+                      }
+                      else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                        return "Enter a valid email";
+                      }
+                      return null;
+                    },
+                    suffixIcon: const Icon(Icons.check, color: Color(0xff34C358)),
                   ),
-
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 20.h),
 
                   // ---------- Remember Me + Switch ----------
                   Row(
@@ -134,24 +131,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 110.h),
-
-                  TermsText(),
-
-                  SizedBox(height: 30.h),
+                  SizedBox(height: 150.h),
 
                   // ---------- Submit Button ----------
                   CustomButton(
-                    text: 'Login',
+                    text: 'Sign up',
                     onpress: () {
                       if (_formKey.currentState!.validate()) {
                         Get.snackbar(
                           "Success",
-                          "Login successfully!",
+                          "Account created successfully!",
                           colorText: Colors.black,
                           snackPosition: SnackPosition.TOP,
                         );
-                        Get.toNamed('/home_screen');
+                        Get.toNamed('/login_screen');
                       } else {
                         Get.snackbar(
                           "Error",
