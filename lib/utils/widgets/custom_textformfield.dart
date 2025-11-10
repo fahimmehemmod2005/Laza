@@ -25,7 +25,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.onChanged,
     this.prefix,
-    this.suffix
+    this.suffix,
   }) : super(key: key);
 
   @override
@@ -36,7 +36,6 @@ class CustomTextFormField extends StatelessWidget {
       validator: validator,
       onChanged: onChanged,
       decoration: InputDecoration(
-
         labelText: label,
         labelStyle: GoogleFonts.inter(
           fontWeight: FontWeight.w400,
@@ -52,7 +51,7 @@ class CustomTextFormField extends StatelessWidget {
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         suffix: suffix,
-        prefix: prefix
+        prefix: prefix,
       ),
     );
   }

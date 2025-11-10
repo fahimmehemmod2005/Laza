@@ -56,32 +56,47 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   // ---------- Text Fields ----------
                   SizedBox(height: 150.h),
-
                   CustomTextFormField(
-                    hintText: 'Esther Howard',
+                    hintText: 'example@gmail.com',
                     label: 'Username',
-                    validator: ( value) {
+                    validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Email is required";
+                        return "Email or mobile number is required";
                       }
-                      else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                        return "Enter a valid email";
+
+                      //  Bangladeshi mobile number validation
+                      final bangladeshPhoneRegex = RegExp(
+                        r'^(?:\+8801|01)[0-9]{9}$',
+                      );
+
+                      //  Gmail-only validation
+                      final gmailRegex = RegExp(
+                        r'^[a-zA-Z0-9._%+-]+@gmail\.com$',
+                      );
+
+                      if (!bangladeshPhoneRegex.hasMatch(value) &&
+                          !gmailRegex.hasMatch(value)) {
+                        return "Enter a valid Bangladeshi phone number or Gmail address";
                       }
+
                       return null;
                     },
-                    suffixIcon: Icon(Icons.check, color: Color(0xff34C358)),
+                    suffixIcon: const Icon(
+                      Icons.check,
+                      color: Color(0xff34C358),
+                    ),
                   ),
+
                   SizedBox(height: 20.h),
 
                   CustomTextFormField(
                     hintText: 'HJ@#9783kja',
                     label: 'Password',
                     obscureText: true,
-                    validator:  ( value) {
+                    validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Password is required";
-                      }
-                      else if (value.length < 6) {
+                      } else if (value.length < 6) {
                         return "Password must be at least 6 characters";
                       }
                       return null;
@@ -151,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           colorText: Colors.black,
                           snackPosition: SnackPosition.TOP,
                         );
-                        Get.toNamed('/home_screen');
+                        Get.toNamed('/main_screen');
                       } else {
                         Get.snackbar(
                           "Error",

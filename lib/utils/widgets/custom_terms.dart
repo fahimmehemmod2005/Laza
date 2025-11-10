@@ -19,10 +19,7 @@ class TermsText extends StatelessWidget {
             color: const Color(0xFF8F959E),
           ),
           children: [
-            const TextSpan(
-              text:
-              "Don't have a account",
-            ),
+            const TextSpan(text: "Don't have a account"),
             TextSpan(
               text: ' Sign up',
               style: GoogleFonts.inter(
@@ -31,7 +28,7 @@ class TermsText extends StatelessWidget {
                 color: const Color(0xFF1D1E20),
               ),
               recognizer: TapGestureRecognizer()
-                ..onTap = () => Get.toNamed('/signup_screen')
+                ..onTap = () => Get.toNamed('/signup_screen'),
             ),
           ],
         ),

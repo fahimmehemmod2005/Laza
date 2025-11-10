@@ -59,16 +59,17 @@ class _SignupScreenState extends State<SignupScreen> {
 
                   // Username Field
                   CustomTextFormField(
-                    hintText: 'Esther Howard',
-                    label: 'Username',
-                    validator:( value) {
+                    hintText: 'Username',
+                    label: 'Esther Howard',
+                    validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "User name is required";
+                        return "Enter your name";
                       }
                       return null;
-                    }, // Use correct validator
+                    },
                     suffixIcon: const Icon(Icons.check, color: Color(0xff34C358)),
                   ),
+
                   SizedBox(height: 20.h),
 
                   // Password Field
@@ -76,11 +77,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     hintText: 'HJ@#9783kja',
                     label: 'Password',
                     obscureText: true,
-                    validator: ( value) {
+                    validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Password is required";
-                      }
-                      else if (value.length < 6) {
+                      } else if (value.length < 6) {
                         return "Password must be at least 6 characters";
                       }
                       return null;
@@ -100,17 +100,26 @@ class _SignupScreenState extends State<SignupScreen> {
                   CustomTextFormField(
                     hintText: 'bill.sanders@example.com',
                     label: 'Email Address',
-                    validator: ( value) {
+                    validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Email is required";
+                        return "Email or mobile number is required";
                       }
-                      else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                        return "Enter a valid email";
+
+                      //  Bangladeshi mobile number validation
+                      final bangladeshPhoneRegex = RegExp(r'^(?:\+8801|01)[0-9]{9}$');
+
+                      //  Gmail-only validation
+                      final gmailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@gmail\.com$');
+
+                      if (!bangladeshPhoneRegex.hasMatch(value) && !gmailRegex.hasMatch(value)) {
+                        return "Enter a valid Bangladeshi phone number or Gmail address";
                       }
+
                       return null;
                     },
                     suffixIcon: const Icon(Icons.check, color: Color(0xff34C358)),
                   ),
+
                   SizedBox(height: 20.h),
 
                   // ---------- Remember Me + Switch ----------
