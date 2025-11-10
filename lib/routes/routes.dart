@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:laza/view/pages/auth/forgot_pages/forgot_screen.dart';
 import 'package:laza/view/pages/auth/forgot_pages/resetpass_screen.dart';
 import 'package:laza/view/pages/auth/login_screen.dart';
-import 'package:laza/view/pages/auth/forgot_pages/otp_screen.dart';
+import 'package:laza/view/pages/auth/forgot_pages/pinput_otp/otp_screen.dart';
 import 'package:laza/view/pages/auth/signup_screen.dart';
 import 'package:laza/view/pages/home/main_screen.dart';
 import 'package:laza/view/pages/splash/splash_screen.dart';
